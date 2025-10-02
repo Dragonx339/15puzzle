@@ -1,25 +1,28 @@
 :root{
-  --card:#171923; --tile:#ff00aa;
-  --text:#ffffff; --sub:#cfd6e6;
+  --card:#171923;
+  --tile:#ff00aa;
+  --text:#ffffff;
+  --sub:#cfd6e6;
 }
 
-/* 画面全体 */
+/* ===== Base ===== */
 html,body{height:100%}
 body{
   margin:0; display:grid; place-items:center; height:100vh;
   background:linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Arial, sans-serif;
-  transition: background 0.8s ease;
+  transition: background .8s ease;
   color:var(--text);
 }
 
-/* ▼ メニュー画面（新規） */
+/* ===== Menu ===== */
 .menu{
   display:grid; place-items:center; gap:16px;
   height:100vh; width:100%;
   background:linear-gradient(135deg, #89f7fe, #66a6ff);
+  padding:24px;
 }
-.menu h1{font-size:32px; margin:0 0 10px}
+.menu h1{font-size:32px; margin:0 0 6px}
 .menu button{
   background:linear-gradient(180deg,#48cfa6,#2aa57f);
   color:#0c2b1f; border:0; padding:14px 24px;
@@ -30,7 +33,7 @@ body{
 .menu button:hover{filter:brightness(1.06)}
 .menu button:active{transform:translateY(1px)}
 
-/* カード */
+/* ===== App Card ===== */
 .app{
   width:min(92vw,540px);
   padding:20px;
@@ -39,31 +42,28 @@ body{
   box-shadow:0 10px 40px rgba(0,0,0,.35);
 }
 
-/* ヘッダー／統計 */
+/* ===== Header / Stats ===== */
 header{
   display:flex; align-items:center; gap:12px; margin-bottom:16px
 }
 h1{font-size:20px; margin:0}
-.stats{display:flex; gap:14px; font-size:14px; color:var(--sub); margin-left:auto}
+.stats{
+  margin-left:auto; display:flex; gap:14px;
+  font-size:14px; color:var(--sub)
+}
 .stats b{color:var(--text)}
+#movesLabel,#timeLabel{color:var(--sub)}
 
-/* ▼ 戻るボタン（新規） */
-.back{
+/* Back / Gear buttons */
+.back,.gear{
   background:none; border:0; color:#fff; cursor:pointer;
   font-size:20px; line-height:1; padding:6px 8px; border-radius:8px;
   transition:filter .15s ease;
 }
-.back:hover{filter:brightness(1.1)}
+.gear{font-size:22px}
+.back:hover,.gear:hover{filter:brightness(1.1)}
 
-/* ▼ 歯車アイコン（新規） */
-.gear{
-  background:none; border:0; color:#fff; cursor:pointer;
-  font-size:22px; line-height:1; padding:6px 8px; border-radius:8px;
-  transition:filter .15s ease;
-}
-.gear:hover{filter:brightness(1.1)}
-
-/* 盤面 */
+/* ===== Board ===== */
 .grid{
   width:100%; aspect-ratio:1/1;
   display:grid; gap:10px; padding:10px;
@@ -73,7 +73,7 @@ h1{font-size:20px; margin:0}
   user-select:none; touch-action:manipulation;
 }
 
-/* タイル */
+/* Tiles */
 .tile{
   display:grid; place-items:center;
   font-weight:800; font-size:clamp(18px,6vw,28px);
@@ -83,11 +83,10 @@ h1{font-size:20px; margin:0}
   cursor:pointer;
 }
 .tile:active{transform:scale(.96)}
-/* 動かせるタイルをハイライト（緑） */
-.tile.fits{background:#00ff15; color:#000;}
+.tile.fits{background:#00ff15; color:#000}
 .tile.empty{visibility:hidden}
 
-/* ボタン群 */
+/* ===== Controls ===== */
 .controls{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
 button{
   background:linear-gradient(180deg,#2b324a,#232740);
@@ -101,24 +100,23 @@ button:active{transform:translateY(1px)}
 .ok{background:linear-gradient(180deg,#48cfa6,#2aa57f); color:#0c2b1f}
 #colorBtn{background:linear-gradient(180deg,#f093fb,#f5576c)}
 
-/* 操作ヒント */
+/* Hint */
 .hint{margin-top:8px; font-size:12px; color:var(--sub)}
 
-/* 説明文（英⇔日）— 旧：本体内表示。今はモーダルにも流用 */
+/* Description (still used in modal text) */
 #description{
   margin-top:14px; padding:10px;
-  background:rgba(255,255,255,0.08);
+  background:rgba(255,255,255,.08);
   border-radius:10px;
   font-size:14px; line-height:1.5;
 }
 #langBtn{
-  margin-top:8px;
-  background:linear-gradient(180deg,#6aa3ff,#3366cc);
+  margin-top:8px; background:linear-gradient(180deg,#6aa3ff,#3366cc);
   color:#fff; border:none; padding:6px 12px;
   border-radius:8px; font-weight:bold; cursor:pointer;
 }
 
-/* クリア表示 */
+/* Win banner */
 .win{
   margin-top:10px; padding:10px 12px; border-radius:10px;
   background:rgba(62,207,142,.12); color:#b9f6d3;
@@ -126,7 +124,7 @@ button:active{transform:translateY(1px)}
 }
 .win.show{display:block}
 
-/* ▼ モーダル（設定・説明・セーブUI）新規 */
+/* ===== Modal (settings/help/save) ===== */
 .modal{
   display:none; position:fixed; z-index:1000; inset:0;
   background:rgba(0,0,0,.5);
@@ -136,14 +134,12 @@ button:active{transform:translateY(1px)}
   width:min(92vw,520px); margin:12vh auto 0; padding:18px;
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.5);
 }
-.close{
-  float:right; font-size:24px; font-weight:700; cursor:pointer;
-}
+.close{float:right; font-size:24px; font-weight:700; cursor:pointer}
 .close:hover{color:#f55}
 .modal-content h2{margin:0 0 8px; font-size:20px}
 .modal-content h3{margin:10px 0 6px; font-size:16px}
 
-/* ▼ セーブ/ロード UI（新規） */
+/* Save/Load UI */
 .save-row{display:flex; gap:8px; margin:8px 0; flex-wrap:wrap}
 .save-row input{
   flex:1; min-width:160px;
@@ -162,6 +158,14 @@ button:active{transform:translateY(1px)}
 .save-list li:hover{filter:brightness(1.05)}
 .save-list small{opacity:.7}
 
-/* ▼ 言語設定（新規・シンプル） */
+/* Language radios */
 .modal-content label{cursor:pointer}
 .modal-content input[type="radio"]{accent-color:#6aa3ff}
+
+/* ===== Responsive (small screens) ===== */
+@media (max-width:420px){
+  .menu h1{font-size:28px}
+  h1{font-size:18px}
+  .controls{gap:8px}
+  button{padding:9px 12px}
+}
