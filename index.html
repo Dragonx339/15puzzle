@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>15 Puzzle</title>
+ <link rel="stylesheet" href="game.css">
+</head>
+<body>
+ <div class="app" id="app">
+   <header>
+     <h1>15 Puzzle</h1>
+     <div class="stats">
+       <div>手数: <b id="moves">0</b></div>
+       <div>時間: <b id="time">00:00</b></div>
+     </div>
+   </header>
+
+
+   <div class="grid" id="grid" aria-label="15パズル 4x4"></div>
+
+
+   <div class="controls">
+     <button id="shuffle">シャッフル</button>
+     <button id="undo">1手戻す</button>
+     <button id="reset">リセット</button>
+     <button id="check" class="ok">揃ってる？</button>
+     <button id="colorBtn">背景チェンジ！</button>
+   </div>
+
+
+   <div class="hint">クリック/タップ、矢印/WASDキー、スマホはスワイプでもOK。</div>
+
+
+   <!-- ▼ ゲームの目的を英⇔日で切り替えるエリア -->
+   <div id="description">
+     <p id="descText">このゲームは15パズルです。タイルを動かして 1〜15 を順番に並べましょう。</p>
+     <button id="langBtn">English</button>
+   </div>
+
+
+   <div class="win" id="win">🎉 クリア！ おめでとう！</div>
+ </div>
+
+
+ <!-- 効果音（ボタン＆移動で使用） -->
+ <audio id="se" src="決定ボタンを押す44.mp3" preload="auto"></audio>
+
+
+ <script src="game.js"></script>
+</body>
+</html>
+
+
+

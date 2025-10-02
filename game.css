@@ -1,0 +1,90 @@
+:root{
+   --card:#171923; --tile:#ff00aa;
+   --text:#ffffff; --sub:#cfd6e6;
+ }
+  /* 画面全体 */
+ html,body{height:100%}
+ body{
+   margin:0; display:grid; place-items:center; height:100vh;
+   background:linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Arial, sans-serif;
+   transition: background 0.8s ease;
+   color:var(--text);
+ }
+  /* カード */
+ .app{
+   width:min(92vw,540px);
+   padding:20px;
+   background:var(--card);
+   border-radius:18px;
+   box-shadow:0 10px 40px rgba(0,0,0,.35);
+ }
+  /* ヘッダー／統計 */
+ header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px}
+ h1{font-size:20px; margin:0}
+ .stats{display:flex; gap:14px; font-size:14px; color:var(--sub)}
+ .stats b{color:var(--text)}
+  /* 盤面 */
+ .grid{
+   width:100%; aspect-ratio:1/1;
+   display:grid; gap:10px; padding:10px;
+   background:rgba(0,0,0,.25);
+   border-radius:14px;
+   grid-template-columns:repeat(4,1fr);
+   user-select:none; touch-action:manipulation;
+ }
+  /* タイル */
+ .tile{
+   display:grid; place-items:center;
+   font-weight:800; font-size:clamp(18px,6vw,28px);
+   background:var(--tile); color:#fff;
+   border-radius:12px;
+   box-shadow:0 8px 18px rgba(0,0,0,.35);
+   cursor:pointer;
+ }
+ .tile:active{transform:scale(.96)}
+ /* 動かせるタイルをハイライト（緑） */
+ .tile.fits{background:#00ff15; color:#000;}
+ .tile.empty{visibility:hidden}
+  /* ボタン群 */
+ .controls{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+ button{
+   background:linear-gradient(180deg,#2b324a,#232740);
+   color:#fff; border:0; padding:10px 14px;
+   border-radius:12px; font-weight:800; cursor:pointer;
+   box-shadow:0 6px 14px rgba(0,0,0,.35);
+   transition:transform .05s ease, filter .15s ease;
+ }
+ button:hover{filter:brightness(1.06)}
+ button:active{transform:translateY(1px)}
+ .ok{background:linear-gradient(180deg,#48cfa6,#2aa57f); color:#0c2b1f}
+ #colorBtn{background:linear-gradient(180deg,#f093fb,#f5576c)}
+  /* 操作ヒント */
+ .hint{margin-top:8px; font-size:12px; color:var(--sub)}
+  /* 説明文（英⇔日） */
+ #description{
+   margin-top: 14px;
+   padding: 10px;
+   background: rgba(255,255,255,0.08);
+   border-radius: 10px;
+   font-size: 14px;
+   line-height: 1.5;
+ }
+ #langBtn{
+   margin-top: 8px;
+   background: linear-gradient(180deg,#6aa3ff,#3366cc);
+   color: #fff;
+   border: none;
+   padding: 6px 12px;
+   border-radius: 8px;
+   font-weight: bold;
+   cursor: pointer;
+ }
+  /* クリア表示 */
+ .win{
+   margin-top:10px; padding:10px 12px; border-radius:10px;
+   background:rgba(62,207,142,.12); color:#b9f6d3;
+   border:1px solid rgba(62,207,142,.4); display:none;
+ }
+ .win.show{display:block}
+ 
