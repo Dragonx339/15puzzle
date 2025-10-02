@@ -2,20 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>15 Puzzle</title>
-  <link rel="stylesheet" href="game.css">
+  <link rel="stylesheet" href="game.css" />
 </head>
 <body>
 
-  <!-- ▼ メニュー画面 -->
+  <!-- ===== メニュー画面 ===== -->
   <div class="menu" id="menu">
     <h1>15 Puzzle</h1>
     <button id="startBtn">スタート</button>
-    <button id="settingsBtn">⚙ 設定</button>
+    <!-- メニュー側の歯車（IDは settingsBtnMenu） -->
+    <button id="settingsBtnMenu">⚙ 設定</button>
   </div>
 
-  <!-- ▼ ゲーム本体 -->
+  <!-- ===== ゲーム画面 ===== -->
   <div class="app" id="app" style="display:none">
     <header>
       <button class="back" id="backBtn">← メニューへ戻る</button>
@@ -24,6 +25,7 @@
         <div><span id="movesLabel">手数</span>: <b id="moves">0</b></div>
         <div><span id="timeLabel">時間</span>: <b id="time">00:00</b></div>
       </div>
+      <!-- ゲーム側の歯車（IDは settingsBtn） -->
       <button class="gear" id="settingsBtn">⚙</button>
     </header>
 
@@ -42,15 +44,16 @@
     <div class="win" id="win">🎉 クリア！ おめでとう！</div>
   </div>
 
-  <!-- ▼ モーダル（説明・設定・セーブ・言語） -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <h2>ゲームの説明</h2>
+  <!-- ===== 設定／説明モーダル ===== -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <span id="closeModal" class="close" aria-label="Close">&times;</span>
+
+      <h2 id="modalTitle">ゲームの説明</h2>
       <p id="descText">このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。</p>
 
-      <!-- 言語選択 -->
-      <hr style="margin:12px 0; opacity:.4">
+      <!-- 言語設定 -->
+      <hr style="margin:12px 0; opacity:.4" />
       <h3 style="margin:8px 0">言語設定</h3>
       <div>
         <label><input type="radio" name="langOpt" value="jp" checked> 日本語</label>
@@ -58,22 +61,22 @@
       </div>
 
       <!-- セーブ／ロード -->
-      <hr style="margin:12px 0; opacity:.4">
+      <hr style="margin:12px 0; opacity:.4" />
       <h3 style="margin:8px 0">セーブ / ロード</h3>
       <div class="save-row">
-        <input id="saveName" type="text" placeholder="セーブ名（例：Shota-01）" maxlength="24">
+        <input id="saveName" type="text" placeholder="セーブ名（例：Shota-01）" maxlength="24" />
         <button id="saveBtn">保存</button>
         <button id="loadBtn">読み込み</button>
         <button id="deleteBtn">消去</button>
       </div>
-      <small style="opacity:.8">ヒント：一覧からクリックで名前をセットできます。</small>
+      <small style="opacity:.8">ヒント：一覧の名前をクリックすると入力欄にセットされます。</small>
       <ul id="saveList" class="save-list"></ul>
 
       <!-- 自動保存 & 全削除 -->
-      <hr style="margin:12px 0; opacity:.4">
+      <hr style="margin:12px 0; opacity:.4" />
       <h3 style="margin:8px 0">自動保存 & データ削除</h3>
-      <label style="display:flex;align-items:center;gap:8px;margin:6px 0;">
-        <input id="autosaveChk" type="checkbox" checked>
+      <label style="display:flex; align-items:center; gap:8px; margin:6px 0;">
+        <input id="autosaveChk" type="checkbox" checked />
         毎手 自動保存（この端末のブラウザに保存）
       </label>
       <div class="save-row" style="margin-top:6px">
@@ -81,13 +84,14 @@
           この端末のセーブを全削除
         </button>
       </div>
-      <small style="opacity:.8">※全削除はこの端末・このブラウザのデータのみ</small>
+      <small style="opacity:.8">※全削除はこの端末・このブラウザの保存データのみ</small>
     </div>
   </div>
 
-  <!-- 効果音 -->
+  <!-- 効果音（無くても動く。無い環境は再生失敗を無視） -->
   <audio id="se" src="決定ボタンを押す44.mp3" preload="auto"></audio>
 
+  <!-- スクリプトは必ず最後で -->
   <script src="game.js"></script>
 </body>
 </html>
