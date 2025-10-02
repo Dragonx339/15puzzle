@@ -10,9 +10,9 @@
 
   <!-- ===== メニュー画面 ===== -->
   <div class="menu" id="menu">
-    <h1>15 Puzzle</h1>
+    <h1 id="menuTitle">15パズル</h1>
     <button id="startBtn">スタート</button>
-    <!-- メニュー側の歯車（IDは settingsBtnMenu） -->
+    <!-- メニュー側の歯車（ゲーム側とIDを分ける） -->
     <button id="settingsBtnMenu">⚙ 設定</button>
   </div>
 
@@ -20,13 +20,15 @@
   <div class="app" id="app" style="display:none">
     <header>
       <button class="back" id="backBtn">← メニューへ戻る</button>
-      <h1>15パズル</h1>
+      <h1 id="appTitle">15パズル</h1>
+
       <div class="stats">
         <div><span id="movesLabel">手数</span>: <b id="moves">0</b></div>
         <div><span id="timeLabel">時間</span>: <b id="time">00:00</b></div>
       </div>
-      <!-- ゲーム側の歯車（IDは settingsBtn） -->
-      <button class="gear" id="settingsBtn">⚙</button>
+
+      <!-- ゲーム側の歯車 -->
+      <button class="gear" id="settingsBtn" aria-label="Settings">⚙</button>
     </header>
 
     <div class="grid" id="grid" aria-label="15パズル 4x4"></div>
@@ -39,7 +41,7 @@
       <button id="colorBtn">背景チェンジ！</button>
     </div>
 
-    <div class="hint">クリック/タップ、矢印/WASDキー、スマホはスワイプでもOK。</div>
+    <div class="hint" id="hintText">クリック/タップ、矢印/WASDキー、スマホはスワイプでもOK。</div>
 
     <div class="win" id="win">🎉 クリア！ おめでとう！</div>
   </div>
@@ -47,51 +49,52 @@
   <!-- ===== 設定／説明モーダル ===== -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <span id="closeModal" class="close" aria-label="Close">&times;</span>
+      <span id="closeModal" class="close" aria-label="閉じる">&times;</span>
 
+      <!-- 説明 -->
       <h2 id="modalTitle">ゲームの説明</h2>
       <p id="descText">このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。</p>
 
       <!-- 言語設定 -->
       <hr style="margin:12px 0; opacity:.4" />
-      <h3 style="margin:8px 0">言語設定</h3>
+      <h3 id="h3Lang" style="margin:8px 0">言語設定</h3>
       <div>
-        <label><input type="radio" name="langOpt" value="jp" checked> 日本語</label>
-        <label style="margin-left:12px;"><input type="radio" name="langOpt" value="en"> English</label>
+        <label><input type="radio" name="langOpt" value="jp" checked> <span id="labelLangJP">日本語</span></label>
+        <label style="margin-left:12px;"><input type="radio" name="langOpt" value="en"> <span id="labelLangEN">English</span></label>
       </div>
 
       <!-- セーブ／ロード -->
       <hr style="margin:12px 0; opacity:.4" />
-      <h3 style="margin:8px 0">セーブ / ロード</h3>
+      <h3 id="h3Save" style="margin:8px 0">セーブ / ロード</h3>
       <div class="save-row">
         <input id="saveName" type="text" placeholder="セーブ名（例：Shota-01）" maxlength="24" />
         <button id="saveBtn">保存</button>
         <button id="loadBtn">読み込み</button>
         <button id="deleteBtn">消去</button>
       </div>
-      <small style="opacity:.8">ヒント：一覧の名前をクリックすると入力欄にセットされます。</small>
+      <small id="saveHintText" style="opacity:.8">ヒント：一覧の名前をクリックすると入力欄にセットされます。</small>
       <ul id="saveList" class="save-list"></ul>
 
       <!-- 自動保存 & 全削除 -->
       <hr style="margin:12px 0; opacity:.4" />
-      <h3 style="margin:8px 0">自動保存 & データ削除</h3>
-      <label style="display:flex; align-items:center; gap:8px; margin:6px 0;">
+      <h3 id="h3Auto" style="margin:8px 0">自動保存 & データ削除</h3>
+      <label for="autosaveChk" style="display:flex; align-items:center; gap:8px; margin:6px 0;">
         <input id="autosaveChk" type="checkbox" checked />
-        毎手 自動保存（この端末のブラウザに保存）
+        <span id="autosaveLabel">毎手 自動保存（この端末のブラウザに保存）</span>
       </label>
       <div class="save-row" style="margin-top:6px">
         <button id="deleteAllBtn" style="background:linear-gradient(180deg,#f093fb,#f5576c);">
           この端末のセーブを全削除
         </button>
       </div>
-      <small style="opacity:.8">※全削除はこの端末・このブラウザの保存データのみ</small>
+      <small id="deleteAllNote" style="opacity:.8">※全削除はこの端末・このブラウザの保存データのみ</small>
     </div>
   </div>
 
-  <!-- 効果音（無くても動く。無い環境は再生失敗を無視） -->
+  <!-- 効果音（無くても動く） -->
   <audio id="se" src="決定ボタンを押す44.mp3" preload="auto"></audio>
 
-  <!-- スクリプトは必ず最後で -->
+  <!-- スクリプトは必ず最後に -->
   <script src="game.js"></script>
 </body>
 </html>
