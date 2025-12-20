@@ -175,7 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Sound ----------
   function playSE(){ try{ se.currentTime=0; se.play(); }catch(e){} }
-  function playSE2(){ if(!se2) return; try{ se2.loop=true; se2.play(); }catch(e){} }
+  function playSE2(){ if(!se2) return; try{ se2.loop=true; if(se2.paused) se2.play(); }catch(e){} }
+  function stopSE2(){ if(!se2) return; try{ se2.paused(); if(reset) se2.currentTime=0; }catch(e){} }
 
   // ---------- Actions ----------
   function moveAtIndex(i,pushUndo=false){
@@ -242,8 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomBackground(){ return backgrounds[Math.floor(Math.random()*backgrounds.length)]; }
 
   // ---------- Menu / Modal ----------
-  if (startBtn) startBtn.addEventListener("click",()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); });
-  if (backBtn)  backBtn.addEventListener("click",()=>{
+  if (startBtn) startBtn.addEventListener("click",()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); try { await playSE2(); } catch(e) {} });
+  if (backBtn)  backBtn.addEventListener("click",()=>{ stopSE2(true);
     appEl.style.display="none"; menuEl.style.display="grid";
     newGame(); resetTimer(); winEl.classList.remove("show"); autoSaveIfEnabled();
   });
@@ -368,5 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
