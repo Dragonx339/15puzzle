@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Sound ----------
   function playSE(){ try{ se.currentTime=0; se.play(); }catch(e){} }
+  function playSE2(){ if(!se2) return; try{ se2.loop=true; se2.play(); }catch(e){} }
 
   // ---------- Actions ----------
   function moveAtIndex(i,pushUndo=false){
@@ -367,4 +368,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
