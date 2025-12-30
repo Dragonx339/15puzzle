@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCheck   = document.getElementById('check');
   const btnColor   = document.getElementById('colorBtn');
   const se         = document.getElementById('se');
-  const se2        = document.getElementById('se2');
 
   const menuEl   = document.getElementById("menu");
   const appEl    = document.getElementById("app");
@@ -410,6 +409,7 @@ if (backBtn) {
     }
   })();
 });
+
 
 
 
