@@ -80,6 +80,26 @@ document.addEventListener('DOMContentLoaded', () => {
   let undoStack = [];
   let elapsedMs = 0;
 
+  // ---------- BGM ----------
+  let bgm;
+  
+  function playBGM() {
+    if (!bgm) {
+      bgm = new Audio("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3");
+      bgm.loop = true;
+    }
+    bgm.currentTime = 0;
+    bgm.play();
+  }
+  
+  function stopBGM() {
+    if (bgm) {
+      bgm.pause();
+      bgm.currentTime = 0;
+    }
+  }
+
+
   // ---------- Language ----------
   function applyLanguage(lang){
     currentLang = lang;
@@ -369,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
