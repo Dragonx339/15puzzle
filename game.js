@@ -85,13 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let bgm;
   
   function playBGM() {
-    if (!bgm) {
-      //bgm = new Audio("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3");
-      bgm.loop = true;
-    }
-    bgm.currentTime = 0;
-    bgm.play();
+  if (!bgm) {
+    bgm = new Audio("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3");
+    bgm.loop = true;
   }
+  bgm.currentTime = 0;
+  bgm.play();
+}
+
   
   function stopBGM() {
     if (bgm) {
@@ -409,6 +410,7 @@ if (backBtn) {
     }
   })();
 });
+
 
 
 
