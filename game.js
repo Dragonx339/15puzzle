@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentLang = localStorage.getItem("puzzleLang") || "jp";
 
-  // ---------- DOM refs ----------
+  // ---------- DOM ----------
   const gridEl   = document.getElementById('grid');
   const movesEl  = document.getElementById('moves');
   const timeEl   = document.getElementById('time');
@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnUndo    = document.getElementById('undo');
   const btnReset   = document.getElementById('reset');
   const btnCheck   = document.getElementById('check');
-  const btnColor   = document.getElementById('colorBtn');
 
   const se = document.getElementById('se');
 
@@ -56,12 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById("startBtn");
   const backBtn  = document.getElementById("backBtn");
 
-  const modalEl    = document.getElementById("modal");
-  const closeModal = document.getElementById("closeModal");
-
-  const settingsButtons =
-    Array.from(document.querySelectorAll('#settingsBtn, #settingsBtnMenu')).filter(Boolean);
-
   // ---------- Save UI ----------
   const saveNameInput = document.getElementById('saveName');
   const saveBtn  = document.getElementById('saveBtn');
@@ -69,9 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const deleteBtn= document.getElementById('deleteBtn');
   const saveList = document.getElementById('saveList');
   const autosaveChk   = document.getElementById('autosaveChk');
-  const deleteAllBtn  = document.getElementById('deleteAllBtn');
-
-  const langRadios = document.querySelectorAll("input[name='langOpt']");
 
   // ---------- Game state ----------
   const N = 4;
@@ -82,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let undoStack = [];
   let elapsedMs = 0;
 
-  // ---------- BGM (JS管理) ----------
+  // ---------- BGM ----------
   let bgm = null;
 
   function playBGM() {
@@ -100,33 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
       bgm.currentTime = 0;
     }
   }
-
-  // ---------- Language ----------
-  function applyLanguage(lang){
-    currentLang = lang;
-    localStorage.setItem("puzzleLang", lang);
-
-    const setText = (sel, text) => {
-      const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
-      if (el) el.textContent = text;
-    };
-
-    setText("header h1", texts[lang].title);
-    setText("#movesLabel", texts[lang].moves);
-    setText("#timeLabel",  texts[lang].time);
-    setText("#shuffle",  texts[lang].shuffle);
-    setText("#undo",     texts[lang].undo);
-    setText("#reset",    texts[lang].reset);
-    setText("#check",    texts[lang].check);
-    setText("#colorBtn", texts[lang].bg);
-    setText("#descText", texts[lang].desc);
-    setText("#win",      texts[lang].win);
-    setText("#startBtn", texts[lang].start);
-    setText("#backBtn",  texts[lang].back);
-  }
-
-  langRadios.forEach(r => r.addEventListener('change', e => applyLanguage(e.target.value)));
-  applyLanguage(currentLang);
 
   // ---------- Timer ----------
   function formatTime(ms){
@@ -148,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function stopTimer(){ clearInterval(timerId); timerId=null; }
   function resetTimer(){ stopTimer(); elapsedMs=0; timeEl.textContent="00:00"; }
 
-  // ---------- Board logic ----------
+  // ---------- Board ----------
   const clone = a => a.slice();
   const idx = (r,c) => r*N+c;
 
@@ -210,18 +173,55 @@ document.addEventListener('DOMContentLoaded', () => {
     try{ se.currentTime=0; se.play(); }catch(e){}
   }
 
+  // ---------- Save / Load ----------
+  const SAVE_PREFIX='puzzleSave:';
+  const AUTO_KEY=SAVE_PREFIX+'__AUTO__';
+
+  function saveSnapshot(key){
+    const data={ board:clone(board), moves, elapsedMs };
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function loadSnapshot(key){
+    const raw=localStorage.getItem(key);
+    if(!raw) return false;
+    const d=JSON.parse(raw);
+    board=d.board; moves=d.moves; elapsedMs=d.elapsedMs;
+    render();
+    timeEl.textContent=formatTime(elapsedMs);
+    return true;
+  }
+
+  function autoSaveIfEnabled(){
+    if(autosaveChk && autosaveChk.checked){
+      saveSnapshot(AUTO_KEY);
+    }
+  }
+
+  function renderSaveList(){
+    if(!saveList) return;
+    saveList.innerHTML='';
+    Object.keys(localStorage)
+      .filter(k=>k.startsWith(SAVE_PREFIX) && k!==AUTO_KEY)
+      .forEach(k=>{
+        const name=k.replace(SAVE_PREFIX,'');
+        const li=document.createElement('li');
+        li.textContent=name;
+        li.onclick=()=>saveNameInput.value=name;
+        saveList.appendChild(li);
+      });
+  }
+
   // ---------- Actions ----------
   function moveAtIndex(i,pushUndo=false){
-    if(!canMove(i)) return false;
+    if(!canMove(i)) return;
     if(pushUndo) undoStack.push(clone(board));
-    const zi=findZero().i;
-    swap(board,i,zi);
+    swap(board,i,findZero().i);
     moves++;
     if(!timerId) startTimer();
     render();
     playSE();
     autoSaveIfEnabled();
-    return true;
   }
 
   function newGame(){
@@ -234,40 +234,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Buttons ----------
-  if (btnShuffle) btnShuffle.addEventListener('click',()=>{ newGame(); playSE(); });
-  if (btnUndo) btnUndo.addEventListener('click',()=>{
-    const prev=undoStack.pop();
-    if(!prev)return;
-    board=prev;
-    moves++;
-    render();
-    playSE();
-  });
-  if (btnReset) btnReset.addEventListener('click',()=>{ newGame(); playSE(); });
-  if (btnCheck) btnCheck.addEventListener('click',()=>{
-    if(isSolved()){ winEl.classList.add('show'); playSE(); }
-  });
+  btnShuffle.onclick=()=>{ newGame(); playSE(); };
+  btnUndo.onclick=()=>{
+    const p=undoStack.pop();
+    if(!p)return;
+    board=p; moves++; render(); playSE();
+  };
+  btnReset.onclick=()=>{ newGame(); playSE(); };
+  btnCheck.onclick=()=>{ if(isSolved()){ winEl.classList.add('show'); playSE(); } };
 
   // ---------- Menu ----------
-  if (startBtn) {
-    startBtn.addEventListener("click", ()=>{
+  startBtn.onclick=()=>{
+    menuEl.style.display="none";
+    appEl.style.display="block";
+    newGame();
+    playBGM();
+  };
+
+  backBtn.onclick=()=>{
+    stopBGM();
+    appEl.style.display="none";
+    menuEl.style.display="grid";
+    resetTimer();
+    winEl.classList.remove("show");
+  };
+
+  // ---------- Save buttons ----------
+  saveBtn.onclick=()=>{
+    if(!saveNameInput.value) return;
+    saveSnapshot(SAVE_PREFIX+saveNameInput.value);
+    renderSaveList();
+  };
+
+  loadBtn.onclick=()=>{
+    if(loadSnapshot(SAVE_PREFIX+saveNameInput.value)){
       menuEl.style.display="none";
       appEl.style.display="block";
-      newGame();
-      playBGM();
-    });
-  }
+    }
+  };
 
-  if (backBtn) {
-    backBtn.addEventListener("click", ()=>{
-      stopBGM();
-      appEl.style.display="none";
-      menuEl.style.display="grid";
-      resetTimer();
-      winEl.classList.remove("show");
-    });
-  }
+  deleteBtn.onclick=()=>{
+    localStorage.removeItem(SAVE_PREFIX+saveNameInput.value);
+    renderSaveList();
+  };
 
   // ---------- Init ----------
-  newGame();
+  autosaveChk.checked=true;
+  if(!loadSnapshot(AUTO_KEY)) newGame();
+  renderSaveList();
 });
