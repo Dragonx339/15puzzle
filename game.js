@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function playBGM() {
     if (!bgm) {
-      bgm = new Audio("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3");
+      //bgm = new Audio("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3");
       bgm.loop = true;
     }
     bgm.currentTime = 0;
@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
