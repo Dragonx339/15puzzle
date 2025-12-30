@@ -196,8 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Sound ----------
   function playSE(){ try{ se.currentTime=0; se.play(); }catch(e){} }
-  function playSE2(){ if(!se2) return; try{ se2.loop=true; if(se2.paused) se2.play(); }catch(e){} }
-  function stopSE2(){ if(!se2) return; try{ se2.paused(); if(reset) se2.currentTime=0; }catch(e){} }
+
 
   // ---------- Actions ----------
   function moveAtIndex(i,pushUndo=false){
@@ -409,6 +408,7 @@ if (backBtn) {
     }
   })();
 });
+
 
 
 
