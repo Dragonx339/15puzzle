@@ -1,3 +1,4 @@
+alert("game.js 読み込まれた");
 // ==========================
 // 15 Puzzle - complete game.js
 // ==========================
@@ -392,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
