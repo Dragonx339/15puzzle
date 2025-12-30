@@ -263,9 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomBackground(){ return backgrounds[Math.floor(Math.random()*backgrounds.length)]; }
 
   // ---------- Menu / Modal ----------
-  if (startBtn) startBtn.addEventListener("click", async ()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); playBGM(); // try {
-                                                              // await playSE2(); 
-                                                             // } catch(e) {} });
+  if (startBtn) startBtn.addEventListener("click", async ()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); playBGM(); 
   if (backBtn)  backBtn.addEventListener("click",()=>{ document.querySelectorAll("audio").forEach(a=>{
     a.pause();
     a.currentTime = 0;
@@ -394,6 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
