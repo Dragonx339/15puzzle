@@ -264,14 +264,30 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomBackground(){ return backgrounds[Math.floor(Math.random()*backgrounds.length)]; }
 
   // ---------- Menu / Modal ----------
-  if (startBtn) startBtn.addEventListener("click", async ()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); playBGM(); 
-  if (backBtn)  backBtn.addEventListener("click",()=>{ document.querySelectorAll("audio").forEach(a=>{
-    a.pause();
-    a.currentTime = 0;
+if (startBtn) {
+  startBtn.addEventListener("click", ()=>{
+    menuEl.style.display = "none";
+    appEl.style.display  = "block";
+    newGame();
+    playBGM();
   });
-    appEl.style.display="none"; menuEl.style.display="grid";
-    newGame(); resetTimer(); winEl.classList.remove("show"); autoSaveIfEnabled();
+}
+
+if (backBtn) {
+  backBtn.addEventListener("click", ()=>{
+    document.querySelectorAll("audio").forEach(a=>{
+      a.pause();
+      a.currentTime = 0;
+    });
+    appEl.style.display = "none";
+    menuEl.style.display = "grid";
+    newGame();
+    resetTimer();
+    winEl.classList.remove("show");
+    autoSaveIfEnabled();
   });
+}
+
 
   settingsButtons.forEach(btn=>{
     btn.addEventListener("click", ()=>{
@@ -393,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
