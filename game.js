@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Menu / Modal ----------
   if (startBtn) startBtn.addEventListener("click", async ()=>{ menuEl.style.display="none"; appEl.style.display="block"; newGame(); playBGM(); try { await playSE2(); } catch(e) {} });
-  if (backBtn)  backBtn.addEventListener("click",()=>{ stopSE2(true);
+  if (backBtn)  backBtn.addEventListener("click",()=>{ stopSE2(true); stopBGM();
     appEl.style.display="none"; menuEl.style.display="grid";
     newGame(); resetTimer(); winEl.classList.remove("show"); autoSaveIfEnabled();
   });
@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
