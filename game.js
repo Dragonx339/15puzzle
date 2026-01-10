@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveNameInput = document.getElementById('saveName');
   const saveBtn  = document.getElementById('saveBtn');
   const loadBtn  = document.getElementById('loadBtn');
-  const deleteBtn= document.getElementById('deleteBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
   const saveList = document.getElementById('saveList');
   const autosaveChk   = document.getElementById('autosaveChk');
 
@@ -283,3 +283,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!loadSnapshot(AUTO_KEY)) newGame();
   renderSaveList();
 });
+
