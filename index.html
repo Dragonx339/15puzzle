@@ -41,9 +41,7 @@
       <button id="colorBtn">背景チェンジ！</button>
     </div>
 
-    <div class="hint" id="hintText">
-      クリック/タップ、矢印/WASDキー、スマホはスワイプでもOK。
-    </div>
+    <div class="hint" id="hintText">クリック/タップ、矢印/WASDキー、スマホはスワイプでもOK。</div>
 
     <div class="win" id="win">🎉 クリア！ おめでとう！</div>
   </div>
@@ -53,26 +51,53 @@
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <span id="closeModal" class="close" aria-label="閉じる">&times;</span>
 
+      <!-- 説明 -->
       <h2 id="modalTitle">ゲームの説明</h2>
-      <p id="descText">
-        このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。
-      </p>
+      <p id="descText">このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。</p>
 
+      <!-- 言語設定 -->
       <hr style="margin:12px 0; opacity:.4" />
-      <h3 id="h3Lang">言語設定</h3>
-      <label><input type="radio" name="langOpt" value="jp" checked> 日本語</label>
-      <label style="margin-left:12px;">
-        <input type="radio" name="langOpt" value="en"> English
+      <h3 id="h3Lang" style="margin:8px 0">言語設定</h3>
+      <div>
+        <label><input type="radio" name="langOpt" value="jp" checked> <span id="labelLangJP">日本語</span></label>
+        <label style="margin-left:12px;"><input type="radio" name="langOpt" value="en"> <span id="labelLangEN">English</span></label>
+      </div>
+
+      <!-- セーブ／ロード -->
+      <hr style="margin:12px 0; opacity:.4" />
+      <h3 id="h3Save" style="margin:8px 0">セーブ / ロード</h3>
+      <div class="save-row">
+        <input id="saveName" type="text" placeholder="セーブ名（例：Shota-01）" maxlength="24" />
+        <button id="saveBtn">保存</button>
+        <button id="loadBtn">読み込み</button>
+        <button id="deleteBtn">消去</button>
+      </div>
+      <small id="saveHintText" style="opacity:.8">ヒント：一覧の名前をクリックすると入力欄にセットされます。</small>
+      <ul id="saveList" class="save-list"></ul>
+
+      <!-- 自動保存 & 全削除 -->
+      <hr style="margin:12px 0; opacity:.4" />
+      <h3 id="h3Auto" style="margin:8px 0">自動保存 & データ削除</h3>
+      <label for="autosaveChk" style="display:flex; align-items:center; gap:8px; margin:6px 0;">
+        <input id="autosaveChk" type="checkbox" checked />
+        <span id="autosaveLabel">毎手 自動保存（この端末のブラウザに保存）</span>
       </label>
+      <div class="save-row" style="margin-top:6px">
+        <button id="deleteAllBtn" style="background:linear-gradient(180deg,#f093fb,#f5576c);">
+          この端末のセーブを全削除
+        </button>
+      </div>
+      <small id="deleteAllNote" style="opacity:.8">※全削除はこの端末・このブラウザの保存データのみ</small>
     </div>
   </div>
 
-  <!-- 効果音（これはOK） -->
+  <!-- 効果音（無くても動く） -->
   <audio id="se" src="決定ボタンを押す44.mp3" preload="auto"></audio>
 
-  <!-- ★ se2 は削除 ★ -->
+  <!-- テトリス効果音 (仮) -->
+  <audio id="se2" src="tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3" preload="auto" loop></audio>
 
-  <!-- ★ defer を必ず付ける ★ -->
-  <script src="game.js" defer></script>
+  <!-- スクリプトは必ず最後に -->
+  <script src="game.js"></script>
 </body>
 </html>
