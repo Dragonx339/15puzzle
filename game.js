@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function newGame(){
-    board=shuffledSolvable(N ** 4); moves=0; undoStack=[];
+    board=shuffledSolvable(); moves=0; undoStack=[];
     resetTimer(); render();
     autoSaveIfEnabled();
   }
@@ -456,6 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
