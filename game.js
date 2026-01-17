@@ -389,8 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
     elapsedMs = Number(data.elapsedMs)||0;
     render();
     if (timeEl) timeEl.textContent = formatTime(elapsedMs);
-    if(menuEl) menuEl.style.display="none";
-    if(appEl)  appEl.style.display="block";
+    //if(menuEl) menuEl.style.display="none";
+    //if(appEl)  appEl.style.display="block";
   }
   function loadGameByName(name){
     const nm=sanitizeName(name || (saveNameInput && saveNameInput.value));
@@ -456,3 +456,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
