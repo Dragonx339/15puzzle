@@ -154,14 +154,45 @@ document.addEventListener('DOMContentLoaded', () => {
     return ((countInversions(arr)+rowFromBottomOfZero(arr))%2)===0;
   }
 
-  function shuffledSolvable(){
-    let a=[...Array(15).keys()].map(x=>x+1).concat(0);
-    do{
-      for(let i=a.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));
-        swap(a,i,j);
+  function shuffledByRandomMoves(iterations = N** 4){
+    const a=[...Array(15).keys()].map(x=>x+1).concat(0);
+    let prevBlank = -1;
+    // do{
+    //   for(let i=a.length-1;i>0;i--){
+    //     const j=Math.floor(Math.random()*(i+1));
+    //     swap(a,i,j);
+    //   }
+    // } while(!isSolvable(a)||isSolved(a));
+    const neihborsOfBlank = (blankIndex) => {
+      const r = Math.floor(blankIndex / N);
+      const c = blankIndex % N;
+      const ns = [];
+      if (r > 0) ns.push(blankIndex -N);
+      if (r < N - 1) ns.push(blankIndex + N);
+      if (c > 0) ns.push(blankIndex - 1);
+      if (c < N -1) ns.push(blankIndex + 1);
+      return ns;
+    };
+    for(let k=0;k<iterations;k++){
+      const blank = a.indexOf(0);
+    let candidates = neighborsOfBlank(blank);
+    if (prebBlank !== -1 && candidates.length > 1){
+      const filtered = candidates.filter(x => x !== prevBlank);
+      if (filtered.length) candidates = filtered;
+    }
+    const target = candidates[Math.floor(Math.random() * candidates.length)];
+    prevBlank = blank;
+    swap(a, blank, target);
+    }
+    if (Solved(a)){
+      for(let K=0;k<8;k++){
+        const blank = a.indexOf(0);
+        const candidates = neighborsOfBlank(blank)
+        const target = candidates[Math.floor(Math.random() * candidates.length)];
+        swwap(a, blank, target);
       }
-    } while(!isSolvable(a)||isSolved(a));
+    }
+    
     return a;
   }
 
@@ -236,7 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function newGame(){
-    board=shuffledSolvable(); moves=0; undoStack=[];
+    board= shuffledByRandomMoves(N ** 4);
+    moves=0; undoStack=[];
     resetTimer(); render();
     autoSaveIfEnabled();
   }
@@ -456,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
