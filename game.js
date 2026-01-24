@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //     swap(a,i,j);
     //   }
     // } while(!isSolvable(a)||isSolved(a));
-    const neihborsOfBlank = (blankIndex) => {
+    const neighborsOfBlank = (blankIndex) => {
       const r = Math.floor(blankIndex / N);
       const c = blankIndex % N;
       const ns = [];
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for(let k=0;k<iterations;k++){
       const blank = a.indexOf(0);
     let candidates = neighborsOfBlank(blank);
-    if (prebBlank !== -1 && candidates.length > 1){
+    if (prevBlank !== -1 && candidates.length > 1){
       const filtered = candidates.filter(x => x !== prevBlank);
       if (filtered.length) candidates = filtered;
     }
@@ -184,12 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBlank = blank;
     swap(a, blank, target);
     }
-    if (Solved(a)){
-      for(let K=0;k<8;k++){
+    if (isSolved(a)){
+      for(let k=0;k<8;k++){
         const blank = a.indexOf(0);
         const candidates = neighborsOfBlank(blank)
         const target = candidates[Math.floor(Math.random() * candidates.length)];
-        swwap(a, blank, target);
+        swap(a, blank, target);
       }
     }
     
@@ -488,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
