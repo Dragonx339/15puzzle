@@ -244,11 +244,10 @@ let currentBgm = null;
         } catch(e) {}
     }
     function syncBgmWithScreen(){
-      const isGameVisible
-      =appEl.style.display !== "none";
+      const isGameVisible =appEl && appEl.style.display !== "none";
       const want = isGameVisible ? "game" : "menu";
       if (currentBgm === want) return;
-      stopSE2(se2, true);
+      stopSE3(se2, true);
       stopSE3(se3, true);
 
       if (want === "game") playLoopAudio(se2);
@@ -529,6 +528,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
