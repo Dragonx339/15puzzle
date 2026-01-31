@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnColor   = document.getElementById('colorBtn');
   const se         = document.getElementById('se');
   const se2        = document.getElementById('se2');
+  const se3        = document.getElementById('se3');
 
   const menuEl   = document.getElementById("menu");
   const appEl    = document.getElementById("app");
@@ -528,6 +529,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
