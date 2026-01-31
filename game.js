@@ -220,37 +220,77 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Sound ----------
-  let bgmWanted = false;
 
-  function playSE(){
-    if(!se) return;
-    try{ se.currentTime=0; se.play(); }catch(e){}
-  }
-  function playSE2(){
-    if(!se2) return;
-    bgmWanted = true;
-    try{
-      se2.loop = true;
-      const p = se2.play();
-      if (p && p.then) {
-        p.then(() => {
-          if (!bgmWanted) {
-            try { se2.pause(); } catch(e) {}
-            try { se2.currentTime = 0; } catch(e) {}
-          }
-        }).catch(() => {});
-      }
-    }catch(e){}
-  }
-  function stopSE2(reset = true){
-    if(!se2) return;
-    bgmWanted = false;
-    try { se2.pause(); } catch(e) {}
+let currentBgm = null;
+  function playSE3(audio){
+    if (!audio)return;
+    try{ audio.currentTime=0; audio.play(); }catch(e){}
+
+    function stopSE3(audio, reset = true){
+    if(!audio) return;
+    try { audio.pause(); } catch(e) {}
     if (reset){
-      try { se2.currentTime = 0; } catch(e) {}
+      try { audio.currentTime = 0; } catch(e) {}
     }
-    try { se2.load(); } catch(e) {}
+    try { audio.load(); } catch(e) {}
   }
+
+    function playLoopAudio (audio){
+      if(!audio) return;
+      try {
+        audio.loop = true;
+        const p = audio.play();
+        if (p && p.patch) p.catch(()=>{});
+        } catch(e) {}
+    }
+    function syncBgmWithScreen(){
+      const isGameVisible
+      =appEl.style.display !== "none";
+      const want = isGameVisible ? "game" : "menu";
+      if (currentBgm === want) return;
+      stopSE2(se2, true);
+      stopSE3(se3, true);
+
+      if (want === "game") playLoopAudio(se2);
+      else playLoopAudio(se3);
+
+      currentBgm = went;
+    }
+       function playSE(){
+         playSE3(se);
+       }
+  
+  // let bgmWanted = false;
+
+  // function playSE(){
+  //   if(!se) return;
+  //   try{ se.currentTime=0; se.play(); }catch(e){}
+  // }
+  // function playSE2(){
+  //   if(!se2) return;
+  //   bgmWanted = true;
+  //   try{
+  //     se2.loop = true;
+  //     const p = se2.play();
+  //     if (p && p.then) {
+  //       p.then(() => {
+  //         if (!bgmWanted) {
+  //           try { se2.pause(); } catch(e) {}
+  //           try { se2.currentTime = 0; } catch(e) {}
+  //         }
+  //       }).catch(() => {});
+  //     }
+  //   }catch(e){}
+  // }
+  // function stopSE2(reset = true){
+  //   if(!se2) return;
+  //   bgmWanted = false;
+  //   try { se2.pause(); } catch(e) {}
+  //   if (reset){
+  //     try { se2.currentTime = 0; } catch(e) {}
+  //   }
+  //   try { se2.load(); } catch(e) {}
+  // }
 
   // ---------- Actions ----------
   function moveAtIndex(i,pushUndo=false){
@@ -351,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(menuEl) menuEl.style.display="none";
     if(appEl)  appEl.style.display="block";
     newGame();
-    playSE2();
+    syncBgmWithScreen();
   });
 
   if (backBtn) backBtn.addEventListener("click",()=>{
@@ -362,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetTimer();
     if(winEl) winEl.classList.remove("show");
     autoSaveIfEnabled();
+    syncBgmWithScreen();
   });
 
   settingsButtons.forEach(btn=>{
@@ -488,6 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 });
+
 
 
 
