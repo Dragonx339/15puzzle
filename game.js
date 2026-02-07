@@ -226,7 +226,7 @@ let currentBgm = null;
   function playSE3(audio){
     if (!audio)return;
     try{ audio.currentTime=0; audio.play(); }catch(e){}
-
+  }
     function stopSE3(audio, reset = true){
     if(!audio) return;
     try { audio.pause(); } catch(e) {}
@@ -529,6 +529,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
