@@ -241,7 +241,7 @@ let currentBgm = null;
       try {
         audio.loop = true;
         const p = audio.play();
-        if (p && p.patch) p.catch(()=>{});
+        if (p && p.catch) p.catch(()=>{});
         } catch(e) {}
     }
     function syncBgmWithScreen(){
@@ -529,6 +529,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
