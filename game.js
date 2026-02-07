@@ -117,16 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#descText", texts[lang].desc);
     setText("#h3Save", texts[lang].h3);
     setText("#win",      texts[lang].win);
-    setText("#saveName", texts[lang].save);
+    // setText("#saveName", texts[lang].save);
     setText("#startBtn", texts[lang].start);
     setText("#saveBtn", texts[lang].savebtn);
     setText("#loadBtn", texts[lang].load);
     setText("#deleteBtn", texts[lang].delete);
     setText("#backBtn",  texts[lang].back);
+    if (saveNameInput) saveNameInput.placeholder = texts[lang].save;
   }
   langRadios.forEach(r => r.addEventListener('change', e => applyLanguage(e.target.value)));
   applyLanguage(currentLang);
 
+  function applyLanguage(lang){
+    currentLang = lang;
+    localStorage.setItem("puzzleLang", lang);
+
+    const setText = (sel, text) => {
+      const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
+      if (el) el.textContent = text;
+    };
+  
   // ---------- Timer ----------
   function formatTime(ms){
     const sec = Math.floor(ms/1000);
@@ -547,6 +557,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
