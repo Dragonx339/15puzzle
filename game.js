@@ -395,7 +395,7 @@ let currentBgm = null;
   });
 
   if (backBtn) backBtn.addEventListener("click",()=>{
-    stopSE2(true);
+    // stopSE2(true);
     if(appEl)  appEl.style.display="none";
     if(menuEl) menuEl.style.display="grid";
     newGame();
@@ -529,6 +529,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
