@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#startBtn", texts[lang].start);
     setText("#saveBtn", texts[lang].savebtn);
     setText("#loadBtn", texts[lang].load);
-    deleteBtn("#deleteBtn", texts[lang].delete);
+    setText("#deleteBtn", texts[lang].delete);
     setText("#backBtn",  texts[lang].back);
   }
   langRadios.forEach(r => r.addEventListener('change', e => applyLanguage(e.target.value)));
@@ -547,6 +547,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
