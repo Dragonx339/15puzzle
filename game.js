@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       start: "スタート",
       savebtn: "保存",
       load: "読み込み",
+      delete: "消去",
       back: "← メニューへ戻る"
     },
     en: {
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       start: "Start",
       savebtn: "Save",
       load: "Load",
+      delete: "Delete",
       back: "← Back to Menu"
     }
   };
@@ -119,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#startBtn", texts[lang].start);
     setText("#saveBtn", texts[lang].savebtn);
     setText("#loadBtn", texts[lang].load);
+    deleteBtn("#deleteBtn", texts[lang].delete);
     setText("#backBtn",  texts[lang].back);
   }
   langRadios.forEach(r => r.addEventListener('change', e => applyLanguage(e.target.value)));
@@ -544,6 +547,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
