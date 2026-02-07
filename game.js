@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: "このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。",
       h3: "セーブ/ロード",
       win: "🎉 クリア！ おめでとう！",
+      save: "セーブ名 (例：Shota-01)",
       start: "スタート",
       back: "← メニューへ戻る"
     },
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: "This is the 15 Puzzle. Move the tiles and arrange them from 1 to 15.",
       h3: "Save/Load",
       win: "🎉 Clear! Congratulations!",
+      save: "savename (e.g., Shota-01)",
       start: "Start",
       back: "← Back to Menu"
     }
@@ -109,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#descText", texts[lang].desc);
     setText("#h3Save", texts[lang].h3);
     setText("#win",      texts[lang].win);
+    setText("#saveName", texts[lang].save);
     setText("#startBtn", texts[lang].start);
     setText("#backBtn",  texts[lang].back);
   }
@@ -535,6 +538,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
