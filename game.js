@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bg: "背景チェンジ！",
       modal: "ゲームの説明",
       desc: "このゲームは15パズルです。タイルを動かして1〜15を順番に並べましょう。",
+      h3: "セーブ/ロード",
       win: "🎉 クリア！ おめでとう！",
       start: "スタート",
       back: "← メニューへ戻る"
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bg: "Change BG!",
       modal: "Game Explanation",
       desc: "This is the 15 Puzzle. Move the tiles and arrange them from 1 to 15.",
+      h3: "Save/Load",
       win: "🎉 Clear! Congratulations!",
       start: "Start",
       back: "← Back to Menu"
@@ -105,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setText("#modalTitle", texts[lang].modal);
     setText("#descText", texts[lang].desc);
+    setText("#h3Save", texts[lang].h3);
     setText("#win",      texts[lang].win);
     setText("#startBtn", texts[lang].start);
     setText("#backBtn",  texts[lang].back);
@@ -532,6 +535,7 @@ let currentBgm = null;
     }
   })();
 });
+
 
 
 
