@@ -350,8 +350,8 @@ let currentBgm = null;
     const key=e.key.toLowerCase(); const {r,c}=findZero(); let target=null;
     if(key==='arrowup'||key==='s'){ if(r<N-1) target=idx(r+1,c); }
     if(key==='arrowdown'||key==='w'){ if(r>0) target=idx(r-1,c); }
-    if(key==='arrowleft'||key==='a'){ if(c<N-1) target=idx(r,c+1); }
-    if(key==='arrowright'||key==='d'){ if(c>0) target=idx(r,c-1); }
+    if(key==='arrowleft'||key==='d'){ if(c<N-1) target=idx(r,c+1); }
+    if(key==='arrowright'||key==='a'){ if(c>0) target=idx(r,c-1); }
     if(target!=null) moveAtIndex(target,true);
   },{passive:true});
 
@@ -561,6 +561,7 @@ let currentBgm = null;
   }
 })();
 });
+
 
 
 
