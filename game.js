@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       win: "🎉 クリア！ おめでとう！",
       h3L: "言語設定",
       save: "セーブ名 (例：Shota-01)",
+      hint: "ヒント：一覧の名前をクリックすると入力欄にセットされます。",
       start: "スタート",
       savebtn: "保存",
       load: "読み込み",
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       win: "🎉 Clear! Congratulations!",
       h3L: "Language Setting",
       save: "savename (e.g., Shota-01)",
+      hint: "Hint: Click a name in the list to automatically fill it into the input box.",
       start: "Start",
       savebtn: "Save",
       load: "Load",
@@ -120,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#h3Save", texts[lang].h3);
     setText("#win",      texts[lang].win);
     setText("#h3Lang", texts[lang].h3L);
+    setText("#saveHintText", texts[lang].hint);
     // setText("#saveName", texts[lang].save);
     setText("#startBtn", texts[lang].start);
     setText("#saveBtn", texts[lang].savebtn);
@@ -552,6 +555,7 @@ let currentBgm = null;
   }
 })();
 });
+
 
 
 
