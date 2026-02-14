@@ -128,14 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
   langRadios.forEach(r => r.addEventListener('change', e => applyLanguage(e.target.value)));
   applyLanguage(currentLang);
 
-  function applyLanguage(lang){
-    currentLang = lang;
-    localStorage.setItem("puzzleLang", lang);
-
-    const setText = (sel, text) => {
-      const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
-      if (el) el.textContent = text;
-    };
   
   // ---------- Timer ----------
   function formatTime(ms){
@@ -282,7 +274,7 @@ let currentBgm = null;
       if (want === "game") playLoopAudio(se2);
       else playLoopAudio(se3);
 
-      currentBgm = went;
+      currentBgm = want;
     }
        function playSE(){
          playSE3(se);
@@ -556,6 +548,8 @@ let currentBgm = null;
     newGame();
   }
 })();
+});
+
 
 
 
