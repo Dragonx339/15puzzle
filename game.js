@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       h3l: "言語設定",
       save: "セーブ名 (例：Shota-01)",
       hint: "ヒント：一覧の名前をクリックすると入力欄にセットされます。",
+      deleteall: "※全削除はこの端末・このブラウザの保存データのみ",
       h3a: "自動保存 & データ削除",
       start: "スタート",
       savebtn: "保存",
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       h3l: "Language Setting",
       save: "savename (e.g., Shota-01)",
       hint: "Hint: Click a name in the list to automatically fill it into the input box.",
+      deleteall: "→ Note: “Delete All” only clears data saved in this browser on this device.",
       h3a: "Auto-Save & Clear Data",
       start: "Start",
       savebtn: "Save",
@@ -125,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText("#win",      texts[lang].win);
     setText("#h3Lang", texts[lang].h3l);
     setText("#saveHintText", texts[lang].hint);
+    setText("#deleteAllNote", texts[lang].deleteall);
     // setText("#saveName", texts[lang].save);
     setText("#startBtn", texts[lang].start);
     setText("#h3Auto", texts[lang].h3a);
@@ -558,6 +561,7 @@ let currentBgm = null;
   }
 })();
 });
+
 
 
 
