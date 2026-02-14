@@ -546,17 +546,18 @@ let currentBgm = null;
   window.addEventListener('beforeunload', ()=>{ autoSaveIfEnabled(); });
 
   // ---------- Init ----------
-  (function init(){
-    try{
-      const raw = localStorage.getItem(AUTO_KEY);
-      if (raw) applyLoadedData(JSON.parse(raw));
-      else     newGame();
-    }catch(e){
-      console.error(e);
-      newGame();
-    }
-  })();
-});
+(function init(){
+  try{
+    const raw = localStorage.getItem(AUTO_KEY);
+    if (raw) applyLoadedData(JSON.parse(raw));
+    else     newGame();
+  }catch(e){
+    console.error(e);
+    newGame();
+  }
+})();
+
+
 
 
 
