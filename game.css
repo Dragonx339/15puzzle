@@ -10,6 +10,8 @@ html,body{height:100%}
 body{
   margin:0; display:grid; place-items:center; height:100vh;
   background-image: url("background2.gif");
+  background-size: cover;
+  background-position: center;
   /* background:linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); */
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Arial, sans-serif;
   transition: background .8s ease;
@@ -21,6 +23,8 @@ body{
   display:grid; place-items:center; gap:16px;
   height:100vh; width:100%;
   background-image: url("background2.gif");
+  background-size: cover;
+  background-position: center;
   /* background:linear-gradient(135deg, #89f7fe, #66a6ff); */
   padding:24px;
 }
@@ -171,6 +175,7 @@ button:active{transform:translateY(1px)}
   .controls{gap:8px}
   button{padding:9px 12px}
 }
+
 
 
 
