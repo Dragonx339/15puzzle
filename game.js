@@ -346,15 +346,33 @@ let currentBgm = null;
   }
 
   // keyboard
+  // window.addEventListener('keydown',(e)=>{
+  //   const key=e.key.toLowerCase(); const {r,c}=findZero(); let target=null;
+  //   if(key==='arrowup'||key==='s'){ if(r<N-1) target=idx(r+1,c); }
+  //   if(key==='arrowdown'||key==='w'){ if(r>0) target=idx(r-1,c); }
+  //   if(key==='arrowleft'||key==='d'){ if(c<N-1) target=idx(r,c+1); }
+  //   if(key==='arrowright'||key==='a'){ if(c>0) target=idx(r,c-1); }
+  //   if(target!=null) moveAtIndex(target,true);
+  // },{passive:true});
   window.addEventListener('keydown',(e)=>{
-    const key=e.key.toLowerCase(); const {r,c}=findZero(); let target=null;
-    if(key==='arrowup'||key==='s'){ if(r<N-1) target=idx(r+1,c); }
-    if(key==='arrowdown'||key==='w'){ if(r>0) target=idx(r-1,c); }
-    if(key==='arrowleft'||key==='d'){ if(c<N-1) target=idx(r,c+1); }
-    if(key==='arrowright'||key==='a'){ if(c>0) target=idx(r,c-1); }
-    if(target!=null) moveAtIndex(target,true);
-  },{passive:true});
+    let key = e.key.toLowerCase();
+    const {r,cc}=findZero();
+    let target=null;
 
+    if (key ==='w' || key ==='s'){
+      if (invertWS) key = (key ==='w')?'s':'w';
+    }
+     if (key ==='a' || key ==='d'){
+      if (invertAD) key = (key ==='a')?'d':'a';
+    }
+      if(key==='arrowup'||key==='s'){ if(r<N-1) target=idx(r+1,c); }
+      if(key==='arrowdown'||key==='w'){ if(r>0) target=idx(r-1,c); }
+      if(key==='arrowleft'||key==='d'){ if(c<N-1) target=idx(r,c+1); }
+      if(key==='arrowright'||key==='a'){ if(c>0) target=idx(r,c-1); }
+        if(target!=null) moveAtIndex(target,true);
+      },{passive:true});
+
+  
   // swipe
   let touchStart=null;
   if (gridEl){
@@ -437,16 +455,30 @@ let currentBgm = null;
     syncBgmWithScreen();
   });
 
+function syncsKeySettingUI(){
+  if (invertWSChk) invertWSChk.checked = invertWS;
+  if (invertADChk) invertADChk.checked = invertAD;
+}
+  
   settingsButtons.forEach(btn=>{
     btn.addEventListener("click", ()=>{
       if(modalEl) modalEl.style.display="block";
       if (autosaveChk) autosaveChk.checked = isAutosaveEnabled();
+      syncsKeySettingUI();
       renderSaveList();
     });
   });
   if (closeModal) closeModal.addEventListener("click",()=>{ if(modalEl) modalEl.style.display="none"; });
   window.addEventListener('click',(e)=>{ if(modalEl && e.target===modalEl) modalEl.style.display="none"; });
-
+if (invertWSChk){
+  invertWSChk.checked = invertWS;
+  invertWSChk.addEventListener('change',()=> setInvertWS(invertWSChk.checked));
+}
+  if (invertADChk){
+  invertADChk.checked = invertAD;
+  invertADChk.addEventListener('change',()=> setInvertAD(invertADChk.checked));
+}
+  
   // ---------- Save / Load / Autosave ----------
   const SAVE_PREFIX='puzzleSave:';
   const LAST_KEY='puzzleSave:last';
@@ -561,6 +593,7 @@ let currentBgm = null;
   }
 })();
 });
+
 
 
 
