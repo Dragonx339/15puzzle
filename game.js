@@ -378,7 +378,6 @@ let currentBgm = null;
   // },{passive:true});
   window.addEventListener('keydown',(e)=>{
     let key = e.key.toLowerCase();
-    const key = e.key.toLowerCase();
 if (["w","a","s","d","arrowup","arrowleft","arrowdown","arrowright"].includes(key)) {
   e.preventDefault();
 }
@@ -620,6 +619,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
