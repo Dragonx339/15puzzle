@@ -2,6 +2,11 @@
 // 15 Puzzle - complete game.js
 // ==========================
 document.addEventListener('DOMContentLoaded', () => {
+  let invertWS = false;
+let invertAD = false;
+
+
+
   // ---------- i18n texts ----------
   const texts = {
     jp: {
@@ -593,6 +598,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
