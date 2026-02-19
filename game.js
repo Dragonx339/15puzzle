@@ -383,7 +383,7 @@ if (["w","a","s","d","arrowup","arrowleft","arrowdown","arrowright"].includes(ke
   e.preventDefault();
 }
 
-    const {r,cc}=findZero();
+    const {r,c}=findZero();
     let target=null;
 
     if (key ==='w' || key ==='s'){
@@ -620,6 +620,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
