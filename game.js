@@ -378,6 +378,11 @@ let currentBgm = null;
   // },{passive:true});
   window.addEventListener('keydown',(e)=>{
     let key = e.key.toLowerCase();
+    const key = e.key.toLowerCase();
+if (["w","a","s","d","arrowup","arrowleft","arrowdown","arrowright"].includes(key)) {
+  e.preventDefault();
+}
+
     const {r,cc}=findZero();
     let target=null;
 
@@ -392,7 +397,7 @@ let currentBgm = null;
       if(key==='arrowleft'||key==='d'){ if(c<N-1) target=idx(r,c+1); }
       if(key==='arrowright'||key==='a'){ if(c>0) target=idx(r,c-1); }
         if(target!=null) moveAtIndex(target,true);
-      },{passive:true});
+      });
 
   
   // swipe
@@ -615,6 +620,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
