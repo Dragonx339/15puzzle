@@ -1,3 +1,7 @@
+window.addEventListener("keydown", (e) => {
+  console.log("keydown:", e.key, "active:", document.activeElement?.tagName, document.activeElement?.id);
+});
+
 // ==========================
 // 15 Puzzle - complete game.js
 // ==========================
@@ -611,6 +615,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
