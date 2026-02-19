@@ -2,8 +2,21 @@
 // 15 Puzzle - complete game.js
 // ==========================
 document.addEventListener('DOMContentLoaded', () => {
-  let invertWS = false;
+let invertWS = false;
 let invertAD = false;
+const invertWSChk = document.getElementById("invertWSChk");
+const invertADChk = document.getElementById("invertADChk");
+
+if (invertWSChk) invertWS = invertWSChk.checked;
+if (invertADChk) invertAD = invertADChk.checked;
+
+invertWSChk?.addEventListener("change", () => {
+  invertWS = invertWSChk.checked;
+});
+
+invertADChk?.addEventListener("change", () => {
+  invertAD = invertADChk.checked;
+});
 
 
 
@@ -598,6 +611,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
