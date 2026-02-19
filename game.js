@@ -498,12 +498,18 @@ function syncsKeySettingUI(){
   window.addEventListener('click',(e)=>{ if(modalEl && e.target===modalEl) modalEl.style.display="none"; });
 if (invertWSChk){
   invertWSChk.checked = invertWS;
-  invertWSChk.addEventListener('change',()=> setInvertWS(invertWSChk.checked));
+  invertWSChk.addEventListener('change', () => {
+    invertWS = invertWSChk.checked;
+  });
 }
-  if (invertADChk){
+
+if (invertADChk){
   invertADChk.checked = invertAD;
-  invertADChk.addEventListener('change',()=> setInvertAD(invertADChk.checked));
+  invertADChk.addEventListener('change', () => {
+    invertAD = invertADChk.checked;
+  });
 }
+
   
   // ---------- Save / Load / Autosave ----------
   const SAVE_PREFIX='puzzleSave:';
@@ -619,6 +625,7 @@ if (invertWSChk){
   }
 })();
 });
+
 
 
 
