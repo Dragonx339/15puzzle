@@ -89,7 +89,7 @@ h1{font-size:20px; margin:0}
   box-shadow:0 8px 18px rgba(0,0,0,.35);
   cursor:pointer;
 }
-.tile:hover{transform:scale(.85)}
+.tile:hover{transform:scale(.90)}
 .tile.fits{background:#00ff15; color:#000}
 .tile.empty{visibility:hidden}
 
@@ -188,6 +188,7 @@ button:active{transform:translateY(1px)}
   object-fit: cover;
   z-index: -1;
 }
+
 
 
 
