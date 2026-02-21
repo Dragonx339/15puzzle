@@ -36,6 +36,7 @@ body{
   box-shadow:0 6px 14px rgba(0,0,0,.35);
   transition:transform .05s ease, filter .15s ease;
 }
+.menu button:hover{background:linear-gradient(180deg,#2aa57f,#0043ffb8);}
 .menu button:hover{filter:brightness(1.06)}
 .menu button:active{transform:translateY(1px)}
 
@@ -187,6 +188,7 @@ button:active{transform:translateY(1px)}
   object-fit: cover;
   z-index: -1;
 }
+
 
 
 
