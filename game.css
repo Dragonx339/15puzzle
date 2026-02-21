@@ -30,7 +30,7 @@ body{
 }
 .menu h1{font-size:32px; margin:0 0 6px}
 .menu button{
-  background:linear-gradient(180deg,#48cfa6,#2aa57f);
+  background:linear-gradient(180deg,#0043ffb8,#2aa57f);
   color:#0c2b1f; border:0; padding:14px 24px;
   border-radius:12px; font-weight:800; cursor:pointer; font-size:18px;
   box-shadow:0 6px 14px rgba(0,0,0,.35);
@@ -187,6 +187,7 @@ button:active{transform:translateY(1px)}
   object-fit: cover;
   z-index: -1;
 }
+
 
 
 
